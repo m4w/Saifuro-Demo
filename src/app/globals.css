@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens. Every color is defined once with light-dark(), so the theme
+ * follows `color-scheme`: the system setting by default, or the user's choice
+ * via [data-theme] on <html>. The default Tailwind palette is switched off, so
+ * components can only use these tokens. Contrast pairs are checked in
+ * src/app/contrast.test.ts.
+ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --color-canvas: light-dark(#f5f6f8, #0d1015);
+  --color-surface: light-dark(#ffffff, #151920);
+  --color-surface-muted: light-dark(#f0f2f5, #1c212a);
+  --color-border: light-dark(#e1e5ea, #2a303b);
+  --color-border-strong: light-dark(#7d8794, #6f7988);
+  --color-text: light-dark(#141821, #e8ebf0);
+  --color-text-muted: light-dark(#525c6a, #a3acb9);
+
+  --color-accent: light-dark(#2449c4, #8eadff);
+  --color-accent-hover: light-dark(#1c3aa3, #b3c8ff);
+  --color-on-accent: light-dark(#ffffff, #0b1530);
+  --color-focus: light-dark(#2449c4, #8eadff);
+
+  --color-success: light-dark(#17693b, #74d39c);
+  --color-success-soft: light-dark(#e5f3eb, #11291b);
+  --color-warning: light-dark(#8a4a00, #f2b860);
+  --color-warning-soft: light-dark(#fcf0dc, #2e2210);
+  --color-danger: light-dark(#b42328, #ff9089);
+  --color-danger-hover: light-dark(#931c20, #ffb3ae);
+  --color-danger-soft: light-dark(#fcebea, #351719);
+  --color-on-danger: light-dark(#ffffff, #2a0a0b);
+  --color-info: light-dark(#2449c4, #8eadff);
+  --color-info-soft: light-dark(#e8eefc, #152039);
+  --color-neutral: light-dark(#4a5462, #b3bbc7);
+  --color-neutral-soft: light-dark(#eef0f3, #222833);
+
+  --animate-pulse-ring: pulse-ring 2s ease-out infinite;
+  @keyframes pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0
+        color-mix(in oklab, var(--color-accent) 45%, transparent);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 6px transparent;
+    }
+  }
+}
+
+:root {
+  color-scheme: light dark;
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply bg-canvas text-text font-sans antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  /* Native <dialog> backdrop, kept in tokens. */
+  dialog::backdrop {
+    background: color-mix(in oklab, #000 45%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
