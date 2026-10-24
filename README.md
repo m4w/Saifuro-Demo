@@ -1,5 +1,7 @@
 # Agent Payments Console
 
+[![CI](https://github.com/m4w/Saifuro-Demo/actions/workflows/ci.yml/badge.svg)](https://github.com/m4w/Saifuro-Demo/actions/workflows/ci.yml)
+
 > **Unofficial demo.** I built this for my application to Saifuro. It is not affiliated with or endorsed by Saifuro, and it doesn't use their name, branding or API. All agents, mandates and approvals are mock data. The paid-out payments are real USDC transfers on the Base Sepolia test network.
 
 A small console where a finance team reviews payments that AI agents want to make. An agent requests a payment, the request is checked against a spending mandate a person approved earlier, and anything that breaks a rule waits in a queue for a human decision.
