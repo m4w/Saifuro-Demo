@@ -15,6 +15,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      # Match the npm that writes package-lock.json locally. Node 22 ships npm 10,
+      # which rejects lock files from npm 11 (missing optional @emnapi/* entries).
+      - run: npm install -g npm@11.6.1
       - run: npm ci
       - run: npm run typecheck
       - run: npm run lint
